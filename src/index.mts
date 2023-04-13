@@ -1,9 +1,5 @@
 import { serve } from "std/http";
-import {
-  Bot,
-  webhookCallback,
-} from "grammy";
-
+import { Bot, webhookCallback } from "grammy";
 import { Menu } from "grammy/menu";
 
 console.log(`Function "telegram-bot" up and running!`);
@@ -26,8 +22,8 @@ const token = await getToken();
 const bot = new Bot(token);
 
 const menu = new Menu("my-menu-identifier")
-  .text("1", x => x.reply('1 slected'))
-  .text("2", x => x.reply('2 slected'));
+  .text("1", (x) => x.reply("1 slected"))
+  .text("2", (x) => x.reply("2 slected"));
 
 // Make it interactive.
 bot.use(menu);
@@ -37,8 +33,8 @@ bot.command("start", (ctx) => {
   ctx.reply("Options", { reply_markup: menu });
 });
 bot.command("ping", (ctx) => ctx.reply(`Pong! ${new Date()} ${Date.now()}`));
-bot.hears(new RegExp('.*'), ctx => ctx.reply('Hello'));
-bot.on(':sticker', x => x.reply('Nice sticker'));
+bot.hears(new RegExp(".*"), (ctx) => ctx.reply("Hello"));
+bot.on(":sticker", (x) => x.reply("Nice sticker"));
 
 const secret = Deno.env.get("FUNCTION_SECRET");
 
